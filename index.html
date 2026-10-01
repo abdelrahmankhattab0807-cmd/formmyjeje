@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love You Jana</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050005;
+    font-family: Georgia, serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    bottom: -20px;
+    background: #ff3f7f;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff3f7f, 0 0 20px #ff3f7f;
+    opacity: 0;
+    animation: rise linear forwards;
+  }
+
+  @keyframes rise {
+    0%   { transform: translateY(0); opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(-110vh); opacity: 0; }
+  }
+
+  .stage {
+    position: relative;
+    width: min(80vw, 80vh, 480px);
+    aspect-ratio: 100 / 95;
+    z-index: 2;
+  }
+
+  .heart {
+    width: 100%;
+    height: 100%;
+    display: block;
+    animation: heartbeat 2s infinite ease-in-out;
+    filter: drop-shadow(0 0 15px #ff4f8b)
+            drop-shadow(0 0 35px #ff2f76)
+            drop-shadow(0 0 60px #ff155f);
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.06); }
+  }
+
+  .message {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
+    color: white;
+    font-size: clamp(18px, 6vw, 38px);
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px white, 0 0 15px #ff75a5, 0 0 35px #ff3d7f;
+    animation: glow 2s infinite alternate;
+  }
+
+  @keyframes glow {
+    from { opacity: 0.7; }
+    to   { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+  <div id="particles"></div>
+
+  <div class="stage">
+    <svg class="heart" viewBox="0 0 100 95" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#ff4f8b"
+            d="M50 88 C20 65 4 48 4 30 C4 16 15 6 28 6 C38 6 46 12 50 20 C54 12 62 6 72 6 C85 6 96 16 96 30 C96 48 80 65 50 88 Z"/>
+    </svg>
+    <div class="message">LOVE YOU JANA</div>
+  </div>
+
+<script>
+  const particles = document.getElementById("particles");
+
+  function createParticle() {
+    const p = document.createElement("div");
+    p.className = "particle";
+
+    const size = Math.random() * 8 + 4;
+    p.style.width = size + "px";
+    p.style.height = size + "px";
+    p.style.left = Math.random() * 100 + "vw";
+
+    const duration = Math.random() * 5 + 4;
+    p.style.animationDuration = duration + "s";
+
+    particles.appendChild(p);
+
+    setTimeout(function () {
+      p.remove();
+    }, duration * 1000 + 200);
+  }
+
+  setInterval(createParticle, 200);
+</script>
+
+</body>
+</html>
